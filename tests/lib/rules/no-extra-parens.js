@@ -178,6 +178,12 @@ ruleTester.run("no-extra-parens", rule, {
         {code: "var a = (b = c)", options: ["functions"]},
         {code: "_ => (a = 0)", options: ["functions"], parserOptions: { ecmaVersion: 6 }},
 
+        // "all-except-cond-assign" enables extra parens around conditional assignments
+        {code: "while ((foo = bar())) {}", options: ["all-except-cond-assign"]},
+        {code: "if ((foo = bar())) {}", options: ["all-except-cond-assign"]},
+        {code: "do; while ((foo = bar()))", options: ["all-except-cond-assign"]},
+        {code: "for (;(a = b););", options: ["all-except-cond-assign"]},
+
         // https://github.com/eslint/eslint/issues/3653
         "(function(){}).foo(), 1, 2;",
         "(function(){}).foo++;",
@@ -303,6 +309,12 @@ ruleTester.run("no-extra-parens", rule, {
         invalid("0, (_ => 0)", "ArrowFunctionExpression", 1, {options: ["functions"], parserOptions: { ecmaVersion: 6 }}),
         invalid("(_ => 0), 0", "ArrowFunctionExpression", 1, {options: ["functions"], parserOptions: { ecmaVersion: 6 }}),
         invalid("a = (_ => 0)", "ArrowFunctionExpression", 1, {options: ["functions"], parserOptions: { ecmaVersion: 6 }}),
+
+
+        invalid("while ((foo = bar())) {}", "AssignmentExpression"),
+        invalid("if ((foo = bar())) {}", "AssignmentExpression"),
+        invalid("do; while ((foo = bar()))", "AssignmentExpression"),
+        invalid("for (;(a = b););", "AssignmentExpression"),
 
         // https://github.com/eslint/eslint/issues/3653
         invalid("((function(){})).foo();", "FunctionExpression"),

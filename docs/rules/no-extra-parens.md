@@ -13,7 +13,15 @@ A few cases of redundant parentheses are always allowed:
 
 ### Options
 
-The default behavior of the rule is specified by `"all"` and it will report unnecessary parentheses around any expression. The following patterns are considered problems:
+This rule takes 1 argument, a string which must be one of the following:
+
+* `"all"` (default): it will report unnecessary parentheses around any expression.
+* `"all-except-cond-assign"`: extra parens are allowed for assignment in conditional statements.
+* `"functions"`: only function expressions will be checked for unnecessary parentheses.
+
+#### "all"
+
+The following patterns are considered problems:
 
 ```js
 /*eslint no-extra-parens: 2*/
@@ -41,7 +49,25 @@ The following patterns are not considered problems:
 (/^a$/).test(x);
 ```
 
-If the option is set to `"functions"`, only function expressions will be checked for unnecessary parentheses. The following patterns are considered problems:
+#### "all-except-cond-assign"
+
+The following patterns are not considered problems:
+
+```js
+/*eslint no-extra-parens: [2, "all-except-cond-assign"]*/
+
+while ((foo = bar())) {}
+
+if ((foo = bar())) {}
+
+do; while ((foo = bar()))
+
+for (;(a = b););
+```
+
+#### "functions"
+
+The following patterns are considered problems:
 
 ```js
 /*eslint no-extra-parens: [2, "functions"]*/
