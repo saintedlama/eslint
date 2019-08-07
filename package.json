@@ -19,7 +19,9 @@
     "perf": "node Makefile.js perf",
     "profile": "beefy tests/bench/bench.js --open -- -t brfs -t ./tests/bench/xform-rules.js -r espree",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "check-commit": "node Makefile.js checkGitCommit"
+    "check-commit": "node Makefile.js checkGitCommit",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "files": [
     "LICENSE",
@@ -68,7 +70,8 @@
     "strip-json-comments": "~1.0.1",
     "table": "^3.7.8",
     "text-table": "~0.2.0",
-    "user-home": "^2.0.0"
+    "user-home": "^2.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "beefy": "^2.0.0",
@@ -113,5 +116,6 @@
   "license": "MIT",
   "engines": {
     "node": ">=0.10"
-  }
+  },
+  "snyk": true
 }
