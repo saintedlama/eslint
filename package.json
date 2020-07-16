@@ -66,7 +66,7 @@
     "require-uncached": "^1.0.2",
     "shelljs": "^0.6.0",
     "strip-json-comments": "~1.0.1",
-    "table": "^3.7.8",
+    "table": "^4.0.3",
     "text-table": "~0.2.0",
     "user-home": "^2.0.0"
   },
